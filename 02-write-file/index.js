@@ -16,10 +16,11 @@ emitter.emit(eventName);
 fs.open('./02-write-file/text.txt', 'a', () => {});
 rl.question('Write your text, please: ', function(answer) {
     fs.appendFile('./02-write-file/text.txt', (answer), (err) => {
-      if(answer.toString().trim() === 'exit'){
+      const str = answer.toString('utf8', 0, answer.length - 2);
+      if(str === 'exit'){
         console.log('Good bye!');
         process.exit();
-      } 
+      };
     });
 });
 process.openStdin().on('keypress', function(chunk, key) {
